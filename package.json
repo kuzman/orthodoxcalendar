@@ -1,8 +1,7 @@
 {
   "name": "orthodoxcalendar",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Darko Kuzmanovski",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -36,5 +35,5 @@
     "ionic": "3.6.0",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic project"
+  "description": "Macedonian Orthodox Calendar"
 }
