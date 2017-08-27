@@ -16,9 +16,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CalendarProvider } from '../providers/calendar/calendar';
+import { PrazniciProvider } from '../providers/praznici/praznici';
 
 export function createTranslateLoader(http: Http) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -31,6 +32,7 @@ export function createTranslateLoader(http: Http) {
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     TranslateModule.forRoot({
       loader: {
@@ -52,7 +54,8 @@ export function createTranslateLoader(http: Http) {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    CalendarProvider
+    CalendarProvider,
+    PrazniciProvider
   ]
 })
 export class AppModule {}
