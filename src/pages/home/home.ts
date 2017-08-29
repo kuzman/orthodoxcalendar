@@ -14,15 +14,11 @@ export class HomePage {
   year = new Date().getFullYear();
   day = new Date().getDate();
   header = '';
-  constructor(public navCtrl: NavController, translate: TranslateService, calendar: CalendarProvider) {
-    
+  constructor(public navCtrl: NavController, translate: TranslateService, private calendar: CalendarProvider) {
+
   }
 
   leadHeader() {
-
-  }
-
-  loadDay() {
 
   }
 }
