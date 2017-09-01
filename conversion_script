@@ -1,0 +1,30 @@
+function convert(json) {
+  var result = [];
+  for(let i=0; i<json.length; i++) {
+    var day= json[i];
+    console.log(day);
+    var dayResult = {};
+    dayResult["day"] = day["-day"];
+    var titles = day['-title'].split(';');
+    var holydays=[];
+    for(let j=0;j<titles.length-1;j++){
+    var holyday = {};
+
+      holyday['title'] = titles[j].trim();
+      if (day.description[j]) {
+        holyday['important'] = day.description[j]['-important'] === 'Y'? true:false;
+        holyday['desc'] = day.description[j]['#text']
+      } else {
+        holyday['important'] = false;
+        holyday['desc'] = "";
+      }
+    // console.log(holyday);
+
+      holydays.push(holyday);
+    }
+    // console.log(holydays);
+    dayResult["holydays"] = holydays;
+    result.push(dayResult);
+  }
+  return result;
+}

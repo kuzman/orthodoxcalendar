@@ -15,10 +15,17 @@ export class HomePage {
   day = new Date().getDate();
   header = '';
   constructor(public navCtrl: NavController, translate: TranslateService, private calendar: CalendarProvider) {
-
+    let month = new Date().getMonth() + 1;
+    calendar.loadMonth(month)
+    .then(data => {
+      calendar.loadDay(this.day, month)
+      .then(dayData => {
+        this.leadHeader(dayData);
+      })
+    })
   }
 
-  leadHeader() {
+  leadHeader(dayData) {
 
   }
 }

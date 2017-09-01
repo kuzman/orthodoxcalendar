@@ -15,20 +15,43 @@ export class CalendarProvider {
     this.month = month;
   }
 
-  public loadMonth(month) {
-    if (month > 0 && month <13 && this.month && this.month.month !== month) {
-      this.http.get(this.path + month + '.json')
-      .map(response => response.json()).subscribe(data => {
-        this.setMonthCache(month);
-      });
+  public loadMonth(month): Promise<any> {
+    if (month > 0 && month <13) {
+      if(this.month && this.month.month === month) {
+      return Promise.resolve(this.month);
+      } else {
+        return new Promise(resolve => {
+          this.http.get(this.path + month + '.json')
+          .map(response => response.json()).subscribe(data => {
+            this.setMonthCache(data);
+            resolve(data);
+          });
+        })
+      }
+    } else {
+      return Promise.reject("Requested month '" + month + "' is not OK");
     }
   }
 
-  public loadDay(day) {
-    if (this.month) {
-      return this.month.days.filter(dayInArray => {
-        dayInArray.id === day;
-      });
+  public loadDay(day, month): Promise<any> {
+    if (day>0 && day<32) {
+      if (this.month.month === month) {
+        return Promise.resolve(this.month.days.filter(dayInArray => {
+          dayInArray.id === day;
+        }));
+      } else {
+        return new Promise(resolve => {
+          this.loadMonth(month)
+          .then(data => {
+            resolve(data.month.days.filter(dayInArray => {
+              dayInArray.id === day;
+            }));
+          })
+        })
+      }
+    } else {
+      return Promise.reject("Requested day '" + day + "' is not OK");
     }
+
   }
 }
