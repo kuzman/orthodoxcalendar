@@ -13,7 +13,8 @@ export class HomePage {
   year = new Date().getFullYear();
   day = new Date().getDate();
   dayInWeek = new Date().getDay();
-  header = '';
+  title_regular = '';
+  title_important = '';
   dayDescription = '';
   constructor(public navCtrl: NavController, private translate: TranslateService, private calendar: CalendarProvider) {
     let month = new Date().getMonth() + 1;
@@ -32,5 +33,16 @@ export class HomePage {
     this.mesec = this.calendar.getMesecName((new Date().getMonth()));
     let dayInYear = dayData.id;
     this.dayDescription = dayOfWeek + ', ' + dayInYear + th;
+    for(let i=0; i<dayData.holydays.length; i++) {
+      if (this.dayInWeek === 0) {
+        this.title_important += dayData.holydays[i].title + ';';
+      } else {
+        if(dayData.holydays[i].important) {
+          this.title_important += dayData.holydays[i].title + ';';
+        } else {
+          this.title_regular += dayData.holydays[i].title + ';';
+        }
+      }
+    }
   }
 }
