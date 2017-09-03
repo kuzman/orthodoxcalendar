@@ -13,8 +13,10 @@ export class HomePage {
   mesec = this.meseci[(new Date().getMonth())]
   year = new Date().getFullYear();
   day = new Date().getDate();
+  dayInWeek = new Date().getDay();
   header = '';
-  constructor(public navCtrl: NavController, translate: TranslateService, private calendar: CalendarProvider) {
+  dayDescription = '';
+  constructor(public navCtrl: NavController, private translate: TranslateService, private calendar: CalendarProvider) {
     let month = new Date().getMonth() + 1;
     calendar.loadMonth(month)
     .then(data => {
@@ -26,6 +28,9 @@ export class HomePage {
   }
 
   leadHeader(dayData) {
-
+    let th = this.translate.instant('th');
+    let dayOfWeek = this.calendar.getDayOfWeek(this.dayInWeek);
+    let dayInYear = dayData.id;
+    this.dayDescription = dayOfWeek + ', ' + dayInYear + th;
   }
 }

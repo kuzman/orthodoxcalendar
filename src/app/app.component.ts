@@ -16,10 +16,11 @@ export class MyApp {
   rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private translate: TranslateService) {
+    translate.setDefaultLang(DEFAULT_LOCALE);
+    translate.use(DEFAULT_LOCALE);
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
-      translate.setDefaultLang(DEFAULT_LOCALE);
     });
   }
 }
