@@ -16,12 +16,14 @@ export class HomePage {
   title_regular = '';
   title_important = '';
   dayDescription = '';
+  days = [];
   constructor(public navCtrl: NavController, private translate: TranslateService, private calendar: CalendarProvider) {
     let month = new Date().getMonth() + 1;
     calendar.loadMonth(month)
     .then(data => {
       calendar.loadDay(this.day, month)
       .then(dayData => {
+        this.days = dayData.holydays;
         this.leadHeader(dayData);
       })
     })

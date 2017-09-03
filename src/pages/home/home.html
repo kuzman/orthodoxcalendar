@@ -13,7 +13,10 @@
       <div class="sub-header-title" text-wrap><div class="title_important">{{title_important}}</div><div>{{title_regular}}</div></div>
     </ion-card-header>
     <ion-card-content>
-
+      <div *ngFor="let day of days">
+        <h3 [ngClass]="day.important ? 'day-title-important' : 'day-title-regular'">{{day.title}}</h3>
+        <div class="day-description" text-justify>{{day.desc}}</div>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -8,8 +8,22 @@ page-home {
 }
 
 .sub-header-title {
-  font-size: 0.8em
+  font-size: 0.8em;
 }
 .title_important {
+  color: red;
+}
+
+.day-description {
+  font-size: 0.85em;
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
+.day-title-regular {
+  color: #3B5998;
+}
+
+.day-title-important {
   color: red;
 }
