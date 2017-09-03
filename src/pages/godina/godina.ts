@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html'
+  selector: 'page-godina',
+  templateUrl: 'godina.html'
 })
-export class ContactPage {
+export class GodinaPage {
   year = '';
   constructor(public navCtrl: NavController) {
-    this.year = new Date().getFullYear().toString(); 
+    this.year = new Date().getFullYear().toString();
   }
 
 }

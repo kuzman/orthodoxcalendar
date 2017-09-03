@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
+import { MesecPage } from '../mesec/mesec';
+import { GodinaPage } from '../godina/godina';
 import { HomePage } from '../home/home';
 import { CalendarProvider } from '../../providers/calendar/calendar'
 
@@ -14,8 +14,8 @@ export class TabsPage {
   mesec = this.meseci[(new Date().getMonth())];
   today = 'today';
   tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tab2Root = MesecPage;
+  tab3Root = GodinaPage;
   year = '';
   currentMonth: any;
   constructor(private calendar: CalendarProvider, private translate: TranslateService) {

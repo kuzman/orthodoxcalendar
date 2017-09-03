@@ -5,8 +5,8 @@ import { HttpModule, Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { MesecPage } from '../pages/mesec/mesec';
+import { GodinaPage } from '../pages/godina/godina';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -25,8 +25,8 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    MesecPage,
+    GodinaPage,
     HomePage,
     TabsPage
   ],
@@ -45,8 +45,8 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    MesecPage,
+    GodinaPage,
     HomePage,
     TabsPage
   ],
