@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class CalendarProvider {
   path = 'assets/months_';
   public month: any;
+  meseci = ['jan', 'fev', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dek'];
   denovi = ['pon', 'vtor', 'sred', 'cet', 'pet', 'sab', 'ned'];
   constructor(private http: Http, private translate: TranslateService) {
     this.path = this.path + translate.currentLang + '/';
@@ -73,6 +74,11 @@ export class CalendarProvider {
 
   public getDayOfWeek(day) {
     let key = this.denovi[day];
+    return this.translate.instant(key);
+  }
+
+  public getMesecName(mesec) {
+    let key = this.meseci[mesec];
     return this.translate.instant(key);
   }
 }

@@ -1,0 +1,31 @@
+function addID(json) {
+  var start = 0;
+  if(json.month === 2) {
+    start = 31;
+  } else if(json.month === 3) {
+    start = 59;
+  } else if(json.month === 4) {
+    start = 90;
+  } else if(json.month === 5) {
+    start = 120;
+  } else if(json.month === 6) {
+    start = 151;
+  } else if(json.month === 7) {
+    start = 181;
+  } else if(json.month === 8) {
+    start = 212;
+  } else if(json.month === 9) {
+    start = 243;
+  } else if(json.month === 10) {
+    start = 273;
+  } else if(json.month === 11) {
+    start = 304;
+  } else if(json.month === 12) {
+    start = 334;
+  }
+  for(var i=0; i<json.days.length;i++) {
+    var offset = start
+    var day = json.days[i];
+    day["id"] = offset+i +1;
+  }
+}

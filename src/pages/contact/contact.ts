@@ -8,7 +8,7 @@ import { NavController } from 'ionic-angular';
 export class ContactPage {
   year = '';
   constructor(public navCtrl: NavController) {
-    this.year = new Date().getFullYear().toString();
+    this.year = new Date().getFullYear().toString(); 
   }
 
 }

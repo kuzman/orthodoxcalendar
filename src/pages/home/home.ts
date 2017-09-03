@@ -9,8 +9,7 @@ import { CalendarProvider } from '../../providers/calendar/calendar'
   templateUrl: 'home.html'
 })
 export class HomePage {
-  meseci = ['jan', 'fev', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sept', 'okt', 'nov', 'dek'];
-  mesec = this.meseci[(new Date().getMonth())]
+  mesec;
   year = new Date().getFullYear();
   day = new Date().getDate();
   dayInWeek = new Date().getDay();
@@ -30,6 +29,7 @@ export class HomePage {
   leadHeader(dayData) {
     let th = this.translate.instant('th');
     let dayOfWeek = this.calendar.getDayOfWeek(this.dayInWeek);
+    this.mesec = this.calendar.getMesecName((new Date().getMonth()));
     let dayInYear = dayData.id;
     this.dayDescription = dayOfWeek + ', ' + dayInYear + th;
   }
