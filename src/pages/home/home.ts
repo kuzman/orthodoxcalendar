@@ -10,17 +10,20 @@ import { CalendarProvider } from '../../providers/calendar/calendar'
 })
 export class HomePage {
   mesec;
-  year = new Date().getFullYear();
-  day = new Date().getDate();
-  dayInWeek = new Date().getDay();
+  currentDate = new Date();
+  movingDate = new Date();
+  year = this.movingDate.getFullYear();
+  day = this.movingDate.getDate();
+  dayInWeek = this.movingDate.getDay();
   title_regular = '';
   title_important = '';
   dayDescription = '';
   days = [];
   constructor(public navCtrl: NavController, private translate: TranslateService, private calendar: CalendarProvider) {
-    let month = new Date().getMonth() + 1;
+    let month = this.currentDate.getMonth() + 1;
     calendar.loadMonth(month)
     .then(data => {
+      calendar.setCurrentMonth(data);
       calendar.loadDay(this.day, month)
       .then(dayData => {
         this.days = dayData.holydays;
@@ -29,10 +32,20 @@ export class HomePage {
     })
   }
 
+
+  /**
+   * 
+   * 
+   * @param {any} dayData 
+   * @memberof HomePage
+   */
   leadHeader(dayData) {
+    this.dayInWeek = this.movingDate.getDay();
+    this.title_important = '';
+    this.title_regular = '';
     let th = this.translate.instant('th');
     let dayOfWeek = this.calendar.getDayOfWeek(this.dayInWeek);
-    this.mesec = this.calendar.getMesecName((new Date().getMonth()));
+    this.mesec = this.calendar.getMesecName((this.movingDate.getMonth()));
     let dayInYear = dayData.id;
     this.dayDescription = dayOfWeek + ', ' + dayInYear + th;
     for(let i=0; i<dayData.holydays.length; i++) {
@@ -46,5 +59,55 @@ export class HomePage {
         }
       }
     }
+  }
+
+
+  /**
+   *
+   *
+   * @memberof HomePage
+   */
+  previousDay() {
+    this.movingDate.setDate(this.movingDate.getDate() - 1);
+    this.loadDayData();
+  }
+
+
+  /**
+   *
+   *
+   * @memberof HomePage
+   */
+  nextDay() {
+    this.movingDate.setDate(this.movingDate.getDate() + 1);
+    this.loadDayData();
+  }
+
+
+  /**
+   *
+   *
+   * @memberof HomePage
+   */
+  loadDayData() {
+    if (this.currentDate.getMonth() === this.movingDate.getMonth()) {
+      this.calendar.loadDay(this.movingDate.getDate(), this.movingDate.getMonth() +1)
+      .then(dayData => {
+        this.days = dayData.holydays;
+        this.leadHeader(dayData);
+      });
+    } else {
+      let month = this.movingDate.getMonth() + 1;
+      this.calendar.loadMonth(month)
+      .then(data => {
+        this.calendar.loadDay(this.movingDate.getDate(), month)
+        .then(dayData => {
+          this.days = dayData.holydays;
+          this.leadHeader(dayData);
+        });
+      });
+    }
+    this.year = this.movingDate.getFullYear();
+    this.day = this.movingDate.getDate();
   }
 }

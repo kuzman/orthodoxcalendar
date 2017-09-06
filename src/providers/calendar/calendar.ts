@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class CalendarProvider {
   path = 'assets/months_';
   public month: any;
+  current_month: any;
   meseci = ['jan', 'fev', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dek'];
   denovi = ['ned', 'pon', 'vtor', 'sred', 'cet', 'pet', 'sab'];
   constructor(private http: Http, private translate: TranslateService) {
@@ -17,7 +18,11 @@ export class CalendarProvider {
     this.month = month;
   }
 
-
+  public setCurrentMonth(month) {
+    if(!this.current_month) {
+      this.current_month = month;
+    }
+  }
 
   /**
    *
@@ -62,7 +67,7 @@ export class CalendarProvider {
         return new Promise(resolve => {
           this.loadMonth(month)
           .then(data => {
-            resolve(data.month.days[Number(day)-1]);
+            resolve(data.days[Number(day)-1]);
           })
         })
       }

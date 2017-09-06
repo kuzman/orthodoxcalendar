@@ -1,8 +1,18 @@
 <ion-header>
   <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (click)="previousDay()">
+        <ion-icon name="arrow-dropleft"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
       {{day}} {{ mesec }} {{year}}
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="nextDay()">
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
