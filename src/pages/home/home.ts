@@ -10,7 +10,6 @@ import { CalendarProvider } from '../../providers/calendar/calendar'
 })
 export class HomePage {
   mesec;
-  currentDate = new Date();
   movingDate = new Date();
   year = this.movingDate.getFullYear();
   day = this.movingDate.getDate();
@@ -23,7 +22,6 @@ export class HomePage {
     this.goToToday();
   }
 
-
   /**
    *
    *
@@ -31,9 +29,9 @@ export class HomePage {
    * @memberof HomePage
    */
   leadHeader(dayData) {
-    this.dayInWeek = this.movingDate.getDay();
     this.title_important = '';
     this.title_regular = '';
+    this.dayInWeek = this.movingDate.getDay();
     let th = this.translate.instant('th');
     let dayOfWeek = this.calendar.getDayOfWeek(this.dayInWeek);
     this.mesec = this.calendar.getMesecName((this.movingDate.getMonth()));
@@ -53,6 +51,35 @@ export class HomePage {
     }
   }
 
+  /**
+   *
+   *
+   * @memberof HomePage
+   */
+  goToToday() {
+    this.movingDate = new Date();
+    let month = this.movingDate.getMonth() + 1;
+    this.calendar.loadMonth(month)
+    .then(data => {
+      this.calendar.setCurrentMonth(data);
+      this.loadDayData();
+    });
+  }
+
+  /**
+   *
+   *
+   * @memberof HomePage
+   */
+  loadDayData() {
+    this.calendar.loadDay(this.movingDate.getDate(), this.movingDate.getMonth() +1)
+    .then(dayData => {
+      this.days = dayData.holydays;
+      this.leadHeader(dayData);
+    });
+    this.year = this.movingDate.getFullYear();
+    this.day = this.movingDate.getDate();
+  }
 
   /**
    *
@@ -64,7 +91,6 @@ export class HomePage {
     this.loadDayData();
   }
 
-
   /**
    *
    *
@@ -75,47 +101,12 @@ export class HomePage {
     this.loadDayData();
   }
 
-  goToToday() {
-    this.movingDate = new Date();
-    let month = this.currentDate.getMonth() + 1;
-    this.calendar.loadMonth(month)
-    .then(data => {
-      this.calendar.setCurrentMonth(data);
-      this.calendar.loadDay(this.currentDate.getDate(), month)
-      .then(dayData => {
-        this.days = dayData.holydays;
-        this.leadHeader(dayData);
-      });
-    });
-  }
-
   /**
    *
    *
+   * @param {any} event
    * @memberof HomePage
    */
-  loadDayData() {
-    if (this.currentDate.getMonth() === this.movingDate.getMonth()) {
-      this.calendar.loadDay(this.movingDate.getDate(), this.movingDate.getMonth() +1)
-      .then(dayData => {
-        this.days = dayData.holydays;
-        this.leadHeader(dayData);
-      });
-    } else {
-      let month = this.movingDate.getMonth() + 1;
-      this.calendar.loadMonth(month)
-      .then(data => {
-        this.calendar.loadDay(this.movingDate.getDate(), month)
-        .then(dayData => {
-          this.days = dayData.holydays;
-          this.leadHeader(dayData);
-        });
-      });
-    }
-    this.year = this.movingDate.getFullYear();
-    this.day = this.movingDate.getDate();
-  }
-
   swipeEvent(event) {
     // from left to right then the delta is positive
     if (event.deltaX > 0) {
