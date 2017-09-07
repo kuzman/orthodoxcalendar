@@ -20,23 +20,14 @@ export class HomePage {
   dayDescription = '';
   days = [];
   constructor(public navCtrl: NavController, private translate: TranslateService, private calendar: CalendarProvider) {
-    let month = this.currentDate.getMonth() + 1;
-    calendar.loadMonth(month)
-    .then(data => {
-      calendar.setCurrentMonth(data);
-      calendar.loadDay(this.day, month)
-      .then(dayData => {
-        this.days = dayData.holydays;
-        this.leadHeader(dayData);
-      })
-    })
+    this.goToToday();
   }
 
 
   /**
-   * 
-   * 
-   * @param {any} dayData 
+   *
+   *
+   * @param {any} dayData
    * @memberof HomePage
    */
   leadHeader(dayData) {
@@ -46,6 +37,7 @@ export class HomePage {
     let th = this.translate.instant('th');
     let dayOfWeek = this.calendar.getDayOfWeek(this.dayInWeek);
     this.mesec = this.calendar.getMesecName((this.movingDate.getMonth()));
+    this.day = this.movingDate.getDate();
     let dayInYear = dayData.id;
     this.dayDescription = dayOfWeek + ', ' + dayInYear + th;
     for(let i=0; i<dayData.holydays.length; i++) {
@@ -83,6 +75,19 @@ export class HomePage {
     this.loadDayData();
   }
 
+  goToToday() {
+    this.movingDate = new Date();
+    let month = this.currentDate.getMonth() + 1;
+    this.calendar.loadMonth(month)
+    .then(data => {
+      this.calendar.setCurrentMonth(data);
+      this.calendar.loadDay(this.currentDate.getDate(), month)
+      .then(dayData => {
+        this.days = dayData.holydays;
+        this.leadHeader(dayData);
+      });
+    });
+  }
 
   /**
    *
@@ -109,5 +114,15 @@ export class HomePage {
     }
     this.year = this.movingDate.getFullYear();
     this.day = this.movingDate.getDate();
+  }
+
+  swipeEvent(event) {
+    // from left to right then the delta is positive
+    if (event.deltaX > 0) {
+      this.previousDay();
+    } else {
+      this.nextDay();
+    }
+
   }
 }

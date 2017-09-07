@@ -16,13 +16,16 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="goToToday()"><ion-icon name="contract"></ion-icon></button>
+  </ion-fab>
   <ion-card>
     <ion-card-header>
       <div class="sub-header-description" text-center>{{dayDescription}}</div>
       <div class="sub-header-title" text-wrap><div class="title_important">{{title_important}}</div><div>{{title_regular}}</div></div>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content (swipe)="swipeEvent($event)">
       <div *ngFor="let day of days">
         <h3 [ngClass]="day.important ? 'day-title-important' : 'day-title-regular'">{{day.title}}</h3>
         <div class="day-description" text-justify>{{day.desc}}</div>
