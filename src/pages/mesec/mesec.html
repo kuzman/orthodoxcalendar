@@ -1,17 +1,40 @@
 <ion-header>
 <ion-navbar>
     <ion-title>
-      {{mesec}}
+      {{mesec}} {{year}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div>{{'day' | translate}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{'gregorijanski' | translate}}</div>
+      </ion-col>
+      <ion-col>
+        <div>{{'julijanski' | translate}}</div>
+      </ion-col>
+      <ion-col col-9>
+        <div></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>1 of 3</div>
+      </ion-col>
+      <ion-col>
+        <div>2 of 3</div>
+      </ion-col>
+      <ion-col>
+        <div>3 of 3</div>
+      </ion-col>
+      <ion-col col-9>
+        <div>4 of 3</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

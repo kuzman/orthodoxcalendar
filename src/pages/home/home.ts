@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { CalendarProvider } from '../../providers/calendar/calendar'
+import { CalendarProvider } from '../../providers/calendar/calendar';
 
 @Component({
   selector: 'page-home',
