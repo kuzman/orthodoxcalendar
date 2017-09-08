@@ -8,32 +8,32 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col>
+    <ion-row class="grid-row">
+      <ion-col class="grid-col-day">
         <div>{{'day' | translate}}</div>
       </ion-col>
-      <ion-col>
+      <ion-col class="grid-col-greg">
         <div>{{'gregorijanski' | translate}}</div>
       </ion-col>
-      <ion-col>
+      <ion-col class="grid-col-jul">
         <div>{{'julijanski' | translate}}</div>
       </ion-col>
       <ion-col col-9>
         <div></div>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngFor="let rowData of tabData" class="grid-row">
       <ion-col>
-        <div>1 of 3</div>
+        <div>{{rowData.dayOfWeek}}</div>
       </ion-col>
       <ion-col>
-        <div>2 of 3</div>
+        <div>{{rowData.date_greg}}</div>
       </ion-col>
       <ion-col>
-        <div>3 of 3</div>
+        <div>{{rowData.date_julian}}</div>
       </ion-col>
-      <ion-col col-9>
-        <div>4 of 3</div>
+      <ion-col col-9 class="grid-col-title">
+        <div class="grid-col-title" text-wrap><div class="grid-col-title-important">{{rowData.title.part_title_important}}</div><div>{{rowData.title.part_title_regular}}</div></div>
       </ion-col>
     </ion-row>
   </ion-grid>
