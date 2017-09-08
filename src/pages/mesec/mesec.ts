@@ -30,6 +30,8 @@ export class MesecPage {
     this.calendar.loadMonth(this.movingDate.getMonth() + 1)
     .then(data => {
       this.mesec = this.calendar.getMesecName((this.movingDate.getMonth()));
+      this.year = this.movingDate.getFullYear();
+      this.tabData = [];
       for(let i=0; i<data.days.length;i++) {
         this.daysData = {
           dayOfWeek: '',
@@ -59,5 +61,15 @@ export class MesecPage {
         this.tabData.push(this.daysData);
       }
     })
+  }
+
+  previousMonth() {
+    this.movingDate.setMonth(this.movingDate.getMonth() - 1);
+    this.loadGridData();
+  }
+
+  nextMonth() {
+    this.movingDate.setMonth(this.movingDate.getMonth() + 1);
+    this.loadGridData();
   }
 }

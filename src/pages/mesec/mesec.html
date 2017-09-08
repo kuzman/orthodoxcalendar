@@ -1,8 +1,18 @@
 <ion-header>
-<ion-navbar>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (click)="previousMonth()">
+        <ion-icon name="arrow-dropleft"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
       {{mesec}} {{year}}
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="nextMonth()">
+        <ion-icon name="arrow-dropright"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
