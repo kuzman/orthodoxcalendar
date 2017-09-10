@@ -126,6 +126,11 @@ export class PrazniciProvider {
     return new Date(year, veligden.getMonth(), veligden.getDate() - 7);
   }
 
+  public getIstochenPetok(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() + 5);
+  }
+
   public getVeligdenskiPosti(year) {
     let veligden = this.getVeligden(year);
     return new Date(year, veligden.getMonth(), veligden.getDate() - 50);
@@ -133,7 +138,6 @@ export class PrazniciProvider {
 
   public getPetroviPosti(year): Date {
     let veligden = this.getVeligden(year);
-    let petroviPosti = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) + 57);
     return new Date(year, veligden.getMonth(), veligden.getDate() + 57);
   }
 
@@ -169,17 +173,36 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getZadushnicaNoemvri(year) {
+  public getZadushnicaNoemvri(year): Date {
     let zadushnicaNoemvri = new Date(year, 10, 1);
     if (zadushnicaNoemvri.getDay() === 5) {
-      return year + '-11-1';
+      return zadushnicaNoemvri;
     } else {
       for (let i=2; i<7; i++) {
         zadushnicaNoemvri = new Date(year, 10, i);
         if (zadushnicaNoemvri.getDay() === 5) {
-          return year + '-11-1';
+          return zadushnicaNoemvri;
         }
       }
+    }
+  }
+
+  public getYearMovingHolydays(year) {
+    return {
+      zadushnica_zimska: this.getZadushnicaZimska(year).setHours(0, 0, 0, 0),
+      prochka: this.getProchka(year).setHours(0, 0, 0, 0),
+      veligdenski_posti: this.getVeligdenskiPosti(year).setHours(0, 0, 0, 0),
+      todorova_sabota: this.getTodorovaSabota(year).setHours(0, 0, 0, 0),
+      lazarova_sabota: this.getLazarovaSabota(year).setHours(0, 0, 0, 0),
+      cvetnici: this.getCvetnici(year).setHours(0, 0, 0, 0),
+      veligden: this.getVeligden(year).setHours(0, 0, 0, 0),
+      veligden_2: this.getVeligdenVtorden(year).setHours(0, 0, 0, 0),
+      veligden_3: this.getVeligdenTretDen(year).setHours(0, 0, 0, 0),
+      istochen_petok: this.getIstochenPetok(year).setHours(0, 0, 0, 0),
+      spasovden: this.getSpasovDen(year).setHours(0, 0, 0, 0),
+      duhovden: this.getDuhovDen(year).setHours(0, 0, 0, 0),
+      petrovi_posti: this.getPetroviPosti(year).setHours(0, 0, 0, 0),
+      zadushnica_noemvri: this.getZadushnicaNoemvri(year).setHours(0, 0, 0, 0)
     }
   }
 

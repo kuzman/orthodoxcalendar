@@ -46,10 +46,10 @@ export class CalendarProvider {
         return new Promise(resolve => {
           this.http.get(this.path + month + '.json')
           .map(response => response.json()).subscribe(data => {
-            if (!this.isLeapYear(this.year)) {
+            if (!this.isLeapYear(this.year) && month==2) {
               data.days = data.days.slice(0, data.days.length - 1);
             } else {
-              if (month > 2) {
+              if (month > 2) { 
                 for (let i=0; i<data.days.length; i++) {
                   data.days[i].id = data.days[i].id + 1;
                 }
@@ -65,7 +65,14 @@ export class CalendarProvider {
     }
   }
 
-  isLeapYear(year) {
+  /**
+   *
+   *
+   * @param {any} year
+   * @returns {Boolean}
+   * @memberof CalendarProvider
+   */
+  isLeapYear(year): Boolean {
     return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
   }
 
@@ -95,13 +102,37 @@ export class CalendarProvider {
     // TODO: manage Feb 29
   }
 
-  public getDayOfWeek(day) {
+  /**
+   *
+   *
+   * @param {any} day
+   * @returns {String}
+   * @memberof CalendarProvider
+   */
+  public getDayOfWeek(day): String {
     let key = this.denovi[day];
     return this.translate.instant(key);
   }
 
-  public getMesecName(mesec) {
+  /**
+   *
+   *
+   * @param {any} mesec
+   * @returns {String}
+   * @memberof CalendarProvider
+   */
+  public getMesecName(mesec): String {
     let key = this.meseci[mesec];
     return this.translate.instant(key);
+  }
+
+  public insertMovingHolyday(day) {
+    let praznici = this.praznici.getYearMovingHolydays(this.year);
+    let dateToCompare = new Date(Number(this.year), Number(this.month.month), Number(day.day)).setHours(0, 0, 0, 0);
+    for (let key in praznici) {
+      if (praznici.hasOwnProperty(key)) {
+
+      }
+    }
   }
 }
