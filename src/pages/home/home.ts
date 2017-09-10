@@ -58,6 +58,8 @@ export class HomePage {
    */
   goToToday() {
     this.movingDate = new Date();
+    this.year = this.movingDate.getFullYear();
+    this.calendar.setYear(this.year);
     let month = this.movingDate.getMonth() + 1;
     this.calendar.loadMonth(month)
     .then(data => {
@@ -72,13 +74,14 @@ export class HomePage {
    * @memberof HomePage
    */
   loadDayData() {
+    this.year = this.movingDate.getFullYear();
+    this.calendar.setYear(this.year);
+    this.day = this.movingDate.getDate();
     this.calendar.loadDay(this.movingDate.getDate(), this.movingDate.getMonth() +1)
     .then(dayData => {
       this.days = dayData.holydays;
       this.leadHeader(dayData);
     });
-    this.year = this.movingDate.getFullYear();
-    this.day = this.movingDate.getDate();
   }
 
   /**

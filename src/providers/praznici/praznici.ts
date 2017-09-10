@@ -6,17 +6,18 @@ export class PrazniciProvider {
   constructor() {
   }
 
-  veligdenDatum = [];
+  veligdenDatum: Date;
+
   /**
-   *
+   * Algorithm for calculation of the Orthodox Easter. Accurate till 2400
    *
    * @param {any} year
-   * @returns
-   * @memberof CalendarProvider
+   * @returns {Date}
+   * @memberof PrazniciProvider
    */
-  public getVeligden(year) {
-    if(Number(this.veligdenDatum[0]) === year) {
-      return this.veligdenDatum[0] + '-' + this.veligdenDatum[1] + '-' + this.veligdenDatum[2];
+  public getVeligden(year): Date {
+    if(this.veligdenDatum.getFullYear() === year) {
+      return this.veligdenDatum;
     } else {
       let a = year % 19;
       let b = year % 7;
@@ -29,11 +30,8 @@ export class PrazniciProvider {
 
       let month = (key > 30) ? 5 : 4;
       let day = (key > 30) ? key - 30 : key;
-      this.veligdenDatum = [];
-      this.veligdenDatum[0] = year;
-      this.veligdenDatum[1] = month;
-      this.veligdenDatum[2] = day;
-      return year + '-' + month + '-' + day;
+      this.veligdenDatum = new Date(year, month-1, day);
+      return this.veligdenDatum;;
     }
   }
 
@@ -45,10 +43,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getVeligdenVtorden(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let veligdenVtorDen = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) + 1);
-    return year + '-' + (veligdenVtorDen.getMonth() + 1) + '-' + veligdenVtorDen.getDate();
+  public getVeligdenVtorden(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() + 1);
   }
 
 
@@ -59,10 +56,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getVeligdenTretDen(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let veligdenTretDen = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) + 2);
-    return year + '-' + (veligdenTretDen.getMonth() + 1) + '-' + veligdenTretDen.getDate();
+  public getVeligdenTretDen(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() + 2);
   }
 
 
@@ -73,10 +69,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getSpasovDen(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let spasovden = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) + 40);
-    return year + '-' + (spasovden.getMonth() + 1) + '-' + spasovden.getDate();
+  public getSpasovDen(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() + 40);
   }
 
 
@@ -87,10 +82,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getProchka(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let prochka = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) - 51);
-    return year + '-' + (prochka.getMonth() + 1) + '-' + prochka.getDate();
+  public getProchka(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() - 51);
   }
 
 
@@ -101,10 +95,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getTodorovaSabota(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let todorovaSabota = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) - 42);
-    return year + '-' + (todorovaSabota.getMonth() + 1) + '-' + todorovaSabota.getDate();
+  public getTodorovaSabota(year) : Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() - 42);
   }
 
 
@@ -115,10 +108,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getLazarovaSabota(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let lazarovaSabota = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) - 42);
-    return year + '-' + (lazarovaSabota.getMonth() + 1) + '-' + lazarovaSabota.getDate();
+  public getLazarovaSabota(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() - 8);
   }
 
 
@@ -129,22 +121,20 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getCvetnici(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let cvetnici = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) - 7);
-    return year + '-' + (cvetnici.getMonth() + 1) + '-' + cvetnici.getDate();
+  public getCvetnici(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() - 7);
   }
 
   public getVeligdenskiPosti(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let veligdenskiPosti = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) - 50);
-    return year + '-' + (veligdenskiPosti.getMonth() + 1) + '-' + veligdenskiPosti.getDate();
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() - 50);
   }
 
-  public getPetroviPosti(year) {
-    let veligden = this.getVeligden(year).split('-');
+  public getPetroviPosti(year): Date {
+    let veligden = this.getVeligden(year);
     let petroviPosti = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) + 57);
-    return year + '-' + (petroviPosti.getMonth() + 1) + '-' + petroviPosti.getDate();
+    return new Date(year, veligden.getMonth(), veligden.getDate() + 57);
   }
 
   /**
@@ -154,10 +144,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getDuhovDen(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let duhovDen = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) + 49);
-    return year + '-' + (duhovDen.getMonth() + 1) + '-' + duhovDen.getDate();
+  public getDuhovDen(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() + 49);
   }
 
 
@@ -168,10 +157,9 @@ export class PrazniciProvider {
    * @returns
    * @memberof CalendarProvider
    */
-  public getZadushnicaZimska(year) {
-    let veligden = this.getVeligden(year).split('-');
-    let zadushnicaZimska = new Date(Number(veligden[0]), Number(veligden[1]) - 1, Number(veligden[2]) - 59);
-    return year + '-' + (zadushnicaZimska.getMonth() + 1) + '-' + zadushnicaZimska.getDate();
+  public getZadushnicaZimska(year): Date {
+    let veligden = this.getVeligden(year);
+    return new Date(year, veligden.getMonth(), veligden.getDate() - 59);
   }
 
   /**

@@ -23,6 +23,7 @@ export class MesecPage {
   year = this.movingDate.getFullYear();
 
   constructor(public navCtrl: NavController, private calendar: CalendarProvider) {
+    this.calendar.setYear(this.year);
     this.loadGridData();
   }
 
@@ -31,6 +32,7 @@ export class MesecPage {
     .then(data => {
       this.mesec = this.calendar.getMesecName((this.movingDate.getMonth()));
       this.year = this.movingDate.getFullYear();
+      this.calendar.setYear(this.year);
       this.tabData = [];
       for(let i=0; i<data.days.length;i++) {
         this.daysData = {

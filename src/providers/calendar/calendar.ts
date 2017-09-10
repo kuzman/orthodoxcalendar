@@ -2,20 +2,27 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { TranslateService } from '@ngx-translate/core';
 
+import { PrazniciProvider } from '../praznici/praznici';
+
 
 @Injectable()
 export class CalendarProvider {
   path = 'assets/months_';
   public month: any;
   current_month: any;
+  year: Number;
   meseci = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dek'];
   denovi = ['ned', 'pon', 'vtor', 'sred', 'cet', 'pet', 'sab'];
-  constructor(private http: Http, private translate: TranslateService) {
+  constructor(private http: Http, private translate: TranslateService, private praznici: PrazniciProvider) {
     this.path = this.path + translate.currentLang + '/';
   }
 
   public setMonthCache(month) {
     this.month = month;
+  }
+
+  public setYear(year) {
+    this.year = year;
   }
 
   public setCurrentMonth(month) {
@@ -39,6 +46,15 @@ export class CalendarProvider {
         return new Promise(resolve => {
           this.http.get(this.path + month + '.json')
           .map(response => response.json()).subscribe(data => {
+            if (!this.isLeapYear(this.year)) {
+              data.days.slice(0, data.days.length - 1)
+            } else {
+              if (month > 2) {
+                for (let i=0; i<data.days.length; i++) {
+                  data.days[i].id = data.days[i].id + 1;
+                }
+              }
+            }
             this.setMonthCache(data);
             resolve(data);
           });
@@ -49,7 +65,9 @@ export class CalendarProvider {
     }
   }
 
-
+  isLeapYear(year) {
+    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+  }
 
   /**
    *
