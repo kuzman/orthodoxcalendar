@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { MesecPage } from '../pages/mesec/mesec';
 import { GodinaPage } from '../pages/godina/godina';
 import { HomePage } from '../pages/home/home';
+import { SettingsPage } from '../pages/settings/settings';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -25,6 +26,7 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     MyApp,
+    SettingsPage,
     MesecPage,
     GodinaPage,
     HomePage,
@@ -45,6 +47,7 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    SettingsPage,
     MesecPage,
     GodinaPage,
     HomePage,

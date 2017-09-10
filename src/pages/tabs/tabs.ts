@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MesecPage } from '../mesec/mesec';
 import { GodinaPage } from '../godina/godina';
 import { HomePage } from '../home/home';
+import { SettingsPage } from '../settings/settings';
 import { CalendarProvider } from '../../providers/calendar/calendar'
 
 @Component({
@@ -16,6 +17,7 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = MesecPage;
   tab3Root = GodinaPage;
+  tab4Root = SettingsPage;
   year = '';
   currentMonth: any;
   constructor(private calendar: CalendarProvider, private translate: TranslateService) {

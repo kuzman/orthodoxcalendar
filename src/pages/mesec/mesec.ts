@@ -28,7 +28,7 @@ export class MesecPage {
 
   loadGridData() {
     this.year = this.movingDate.getFullYear();
-    this.calendar.setYear(this.year); 
+    this.calendar.setYear(this.year);
     this.calendar.loadMonth(this.movingDate.getMonth() + 1)
     .then(data => {
       this.mesec = this.calendar.getMesecName((this.movingDate.getMonth()));
@@ -72,5 +72,14 @@ export class MesecPage {
   nextMonth() {
     this.movingDate.setMonth(this.movingDate.getMonth() + 1);
     this.loadGridData();
+  }
+
+  swipeEvent(event) {
+    // from left to right then the delta is positive
+    if (event.deltaX > 0) {
+      this.previousMonth();
+    } else {
+      this.nextMonth();
+    }
   }
 }

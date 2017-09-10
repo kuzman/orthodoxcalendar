@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid (swipe)="swipeEvent($event)">
     <ion-row class="grid-row">
       <ion-col>
         <div>{{'day' | translate}}</div>

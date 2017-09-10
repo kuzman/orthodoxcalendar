@@ -117,6 +117,5 @@ export class HomePage {
     } else {
       this.nextDay();
     }
-
   }
 }
