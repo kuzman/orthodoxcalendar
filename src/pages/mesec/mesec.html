@@ -19,20 +19,20 @@
 <ion-content>
   <ion-grid>
     <ion-row class="grid-row">
-      <ion-col class="grid-col-day">
+      <ion-col>
         <div>{{'day' | translate}}</div>
       </ion-col>
-      <ion-col class="grid-col-greg">
+      <ion-col>
         <div>{{'gregorijanski' | translate}}</div>
       </ion-col>
-      <ion-col class="grid-col-jul">
+      <ion-col>
         <div>{{'julijanski' | translate}}</div>
       </ion-col>
       <ion-col col-9>
         <div></div>
       </ion-col>
     </ion-row>
-    <ion-row *ngFor="let rowData of tabData" class="grid-row">
+    <ion-row *ngFor="let rowData of tabData; even as isEven" class="grid-row" [ngClass]="isEven?'grid-col-even':''">
       <ion-col>
         <div>{{rowData.dayOfWeek}}</div>
       </ion-col>
