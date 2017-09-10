@@ -47,7 +47,7 @@ export class CalendarProvider {
           this.http.get(this.path + month + '.json')
           .map(response => response.json()).subscribe(data => {
             if (!this.isLeapYear(this.year)) {
-              data.days.slice(0, data.days.length - 1)
+              data.days = data.days.slice(0, data.days.length - 1);
             } else {
               if (month > 2) {
                 for (let i=0; i<data.days.length; i++) {
