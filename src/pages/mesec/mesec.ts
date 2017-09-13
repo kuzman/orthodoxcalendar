@@ -43,17 +43,18 @@ export class MesecPage {
             part_title_regular: ''
           }
         };
+        this.calendar.handleMovingHolyday(data.days[i]);
         let date = new Date (this.movingDate.getFullYear(), this.movingDate.getMonth(), data.days[i].day);
         this.daysData.dayOfWeek = this.calendar.getDayOfWeek(date.getDay()).substring(0, 3);
         this.daysData.date_greg = data.days[i].day;
         for(let j =0; j<data.days[i].holydays.length; j++) {
           if (date.getDay() === 0) {
-            this.daysData.title.part_title_important += data.days[i].holydays[j].title + ';';
+            this.daysData.title.part_title_important += data.days[i].holydays[j].title + '; ';
           } else {
             if(data.days[i].holydays[j].important) {
-              this.daysData.title.part_title_important += data.days[i].holydays[j].title + ';';
+              this.daysData.title.part_title_important += data.days[i].holydays[j].title + '; ';
             } else {
-              this.daysData.title.part_title_regular += data.days[i].holydays[j].title + ';';
+              this.daysData.title.part_title_regular += data.days[i].holydays[j].title + '; ';
             }
           }
         }
