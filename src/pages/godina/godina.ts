@@ -17,6 +17,7 @@ export class GodinaPage {
   }
 
   public loadPraznici(year) {
+    this.prazniciList = [];
     let yearMovingHolyday = this.praznici.getYearMovingHolydays(this.year);
     let i = 0;
     for (let key in yearMovingHolyday) {
@@ -28,6 +29,25 @@ export class GodinaPage {
         });
         i++;
       }
+    }
+  }
+
+  public previousYear() {
+    this.year -= 1;
+    this.loadPraznici(this.year);
+  }
+
+  public nextYear() {
+    this.year += 1;
+    this.loadPraznici(this.year);
+  }
+
+  public swipeEvent(event) {
+    // from left to right then the delta is positive
+    if (event.deltaX > 0) {
+      this.previousYear();
+    } else {
+      this.nextYear();
     }
   }
 

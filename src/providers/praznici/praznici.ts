@@ -217,7 +217,7 @@ export class PrazniciProvider {
     if (zadushnicaNoemvri.getDay() === 6) {
       return zadushnicaNoemvri;
     } else {
-      for (let i=2; i<7; i++) {
+      for (let i=2; i<8; i++) {
         zadushnicaNoemvri = new Date(year, 10, i);
         if (zadushnicaNoemvri.getDay() === 6) {
           return zadushnicaNoemvri;

@@ -1,13 +1,23 @@
 <ion-header>
     <ion-navbar>
+        <ion-buttons start>
+          <button ion-button icon-only color="royal" (click)="previousYear()">
+            <ion-icon name="arrow-dropleft"></ion-icon>
+          </button>
+        </ion-buttons>
       <ion-title>
         {{year}}
       </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only color="royal" (click)="nextYear()">
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
+      </ion-buttons>
     </ion-navbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
+    <ion-list (swipe)="swipeEvent($event)">
       <ion-list-header>{{'povazhni_praznici' | translate}}</ion-list-header>
       <ion-item *ngFor="let item of prazniciList" text-wrap>
         <ion-avatar item-start>
