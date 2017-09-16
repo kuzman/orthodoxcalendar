@@ -9,6 +9,13 @@
   <ion-content>
     <ion-list>
       <ion-list-header>{{'povazhni_praznici' | translate}}</ion-list-header>
+      <ion-item *ngFor="let item of prazniciList" text-wrap>
+        <ion-avatar item-start>
+          <img [src]=item.img>
+        </ion-avatar>
+        <h2>{{item.title}}</h2>
+        <p>{{item.date | date: 'dd/M/y'}}</p>
+      </ion-item>
     </ion-list>
   </ion-content>
-  <ion-header>
+<ion-header>

@@ -161,7 +161,7 @@ export class CalendarProvider {
               });
             }
             break;
-          case 'todorova_sabota':
+          case 'todorovaSabota':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
                 title: this.translate.instant('todorovaSabota'),
@@ -170,7 +170,7 @@ export class CalendarProvider {
               });
             }
             break;
-          case 'lazarova_sabota':
+          case 'lazarovaSabota':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
                 title: this.translate.instant('lazarovaSabota'),
@@ -197,7 +197,7 @@ export class CalendarProvider {
               });
             }
             break;
-          case 'veliliPetok':
+          case 'velikiPetok':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
                 title: this.translate.instant('veliliPetok'),
@@ -242,7 +242,7 @@ export class CalendarProvider {
               });
             }
             break;
-          case 'istochen_petok':
+          case 'istochenPetok':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
                 title: this.translate.instant('istochenPetok'),
@@ -260,7 +260,7 @@ export class CalendarProvider {
               });
             }
             break;
-          case 'duhovden':
+          case 'duovden':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
                 title: this.translate.instant('duovden'),
@@ -287,7 +287,7 @@ export class CalendarProvider {
               });
             }
             break;
-          case 'petrovi_posti':
+          case 'petroviPosti':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
                 title: this.translate.instant('petroviPosti'),
