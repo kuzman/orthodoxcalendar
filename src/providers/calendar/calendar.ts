@@ -7,29 +7,37 @@ import { PrazniciProvider } from '../praznici/praznici';
 
 @Injectable()
 export class CalendarProvider {
-  path = 'assets/months_';
+  path = 'assets/months_' + this.translate.currentLang + '/';
+
   public month: any;
-  current_month: any;
+  // current_month: any;
   year: Number;
   meseci = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dek'];
   denovi = ['ned', 'pon', 'vtor', 'sred', 'cet', 'pet', 'sab'];
   constructor(private http: Http, private translate: TranslateService, private praznici: PrazniciProvider) {
-    this.path = this.path + translate.currentLang + '/';
   }
 
   public setMonthCache(month) {
     this.month = month;
   }
 
+  public clearMonthCache() {
+    this.month = null;
+  }
+
+  public setPath(lang) {
+    this.path = 'assets/months_' + lang + '/';
+  }
+
   public setYear(year) {
     this.year = year;
   }
 
-  public setCurrentMonth(month) {
-    if(!this.current_month) {
-      this.current_month = month;
-    }
-  }
+  // public setCurrentMonth(month) {
+  //   if(!this.current_month) {
+  //     this.current_month = month;
+  //   }
+  // }
 
   /**
    *

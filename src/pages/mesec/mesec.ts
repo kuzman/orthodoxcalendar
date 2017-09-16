@@ -23,6 +23,10 @@ export class MesecPage {
   year = this.movingDate.getFullYear();
 
   constructor(public navCtrl: NavController, private calendar: CalendarProvider) {
+    //this.loadGridData();
+  }
+
+  ionViewWillEnter() {
     this.loadGridData();
   }
 

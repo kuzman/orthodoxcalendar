@@ -19,6 +19,10 @@ export class HomePage {
   dayDescription = '';
   days = [];
   constructor(public navCtrl: NavController, private translate: TranslateService, private calendar: CalendarProvider) {
+    // this.goToToday();
+  }
+
+  ionViewWillEnter() {
     this.goToToday();
   }
 
@@ -28,7 +32,7 @@ export class HomePage {
    * @param {any} dayData
    * @memberof HomePage
    */
-  leadHeader(dayData) {
+  loadHeader(dayData) {
     this.title_important = '';
     this.title_regular = '';
     this.dayInWeek = this.movingDate.getDay();
@@ -63,7 +67,7 @@ export class HomePage {
     let month = this.movingDate.getMonth() + 1;
     this.calendar.loadMonth(month)
     .then(data => {
-      this.calendar.setCurrentMonth(data);
+      // this.calendar.setCurrentMonth(data);
       this.loadDayData();
     });
   }
@@ -80,7 +84,7 @@ export class HomePage {
     this.calendar.loadDay(this.movingDate.getDate(), this.movingDate.getMonth() +1)
     .then(dayData => {
       this.days = dayData.holydays;
-      this.leadHeader(dayData);
+      this.loadHeader(dayData);
     });
   }
 

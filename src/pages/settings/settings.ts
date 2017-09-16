@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import { CalendarProvider } from '../../providers/calendar/calendar';
 
 @IonicPage()
 @Component({
@@ -7,12 +10,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  language = this.translate.currentLang;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private translate: TranslateService, private calendar: CalendarProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
+  }
+
+  onChange(lang) {
+    this.calendar.clearMonthCache();
+    this.calendar.setPath(lang);
+    this.translate.use(lang);
   }
 
 }

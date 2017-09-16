@@ -7,6 +7,14 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>{{'language' | translate}}</ion-label>
+      <ion-select [(ngModel)]="language" cancelText="{{'cancel' | translate}}" (ngModelChange)="onChange($event)">
+        <ion-option value="en">{{'english_language' | translate}}</ion-option>
+        <ion-option value="mk">{{'macedonian_language' | translate}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
 </ion-content>
