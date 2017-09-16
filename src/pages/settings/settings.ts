@@ -21,6 +21,7 @@ export class SettingsPage {
     this.calendar.clearMonthCache();
     this.calendar.setPath(lang);
     this.translate.use(lang);
+    this.calendar.loadMonth(new Date().getMonth() + 1);
   }
 
 }

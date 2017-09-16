@@ -19,7 +19,6 @@ export class HomePage {
   dayDescription = '';
   days = [];
   constructor(public navCtrl: NavController, private translate: TranslateService, private calendar: CalendarProvider) {
-    // this.goToToday();
   }
 
   ionViewWillEnter() {
