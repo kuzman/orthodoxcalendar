@@ -20,9 +20,9 @@
     <ion-list (swipe)="swipeEvent($event)">
       <ion-list-header>{{'povazhni_praznici' | translate}}</ion-list-header>
       <ion-item *ngFor="let item of prazniciList" text-wrap>
-        <ion-avatar item-start>
+        <ion-thumbnail item-start>
           <img [src]=item.img>
-        </ion-avatar>
+        </ion-thumbnail>
         <h2>{{item.title}}</h2>
         <p>{{item.date | date: 'dd/M/y'}}</p>
       </ion-item>
