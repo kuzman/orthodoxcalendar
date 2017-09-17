@@ -1,26 +1,4 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+This is an Ionic project to replace the application [Macedonian Orthodox Calendar](https://play.google.com/store/apps/details?id=com.mpcalendar.orthodoxcalendar) written only for Android and in Java. As it was a learning project, it contains a lot of bugs and design errors. This Ionic app was done in a lot shorter time, but the author's experience in JavaScript frameworks is much more rich than Android.
 
-## How to use this template
-
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
-
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
-```
-
-Then, to run it, cd into `myTabs` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
+One side effect is that this project, later compiled into an application cannot have widgets as you can have on a native Android app.
 
