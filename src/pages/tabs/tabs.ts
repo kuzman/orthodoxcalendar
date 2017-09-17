@@ -5,7 +5,6 @@ import { MesecPage } from '../mesec/mesec';
 import { GodinaPage } from '../godina/godina';
 import { HomePage } from '../home/home';
 import { SettingsPage } from '../settings/settings';
-import { CalendarProvider } from '../../providers/calendar/calendar'
 
 @Component({
   templateUrl: 'tabs.html'
@@ -20,12 +19,8 @@ export class TabsPage {
   tab4Root = SettingsPage;
   year = '';
   currentMonth: any;
-  constructor(private calendar: CalendarProvider, private translate: TranslateService) {
+  constructor(private translate: TranslateService) {
     this.year = new Date().getFullYear().toString();
   }
 
-  loadCurrentMonth() {
-    let month = new Date().getMonth() + 1;
-    // this.currentMonth = this.calendar.loadMonth(month);
-  }
 }

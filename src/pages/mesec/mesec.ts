@@ -26,6 +26,7 @@ export class MesecPage {
   }
 
   ionViewWillEnter() {
+    this.movingDate = new Date();
     this.loadGridData();
   }
 

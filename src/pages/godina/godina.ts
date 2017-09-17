@@ -13,6 +13,10 @@ export class GodinaPage {
   skipHolyDays = ['velikiChetvrtok','velikiPetok','velikaSabota','veligden_2','veligden_3', 'duovden2', 'duovden3'];
   prazniciList = [];
   constructor(public navCtrl: NavController, private praznici: PrazniciProvider, private translate: TranslateService) {
+    // this.loadPraznici(this.year);
+  }
+
+  ionViewWillEnter() {
     this.loadPraznici(this.year);
   }
 
