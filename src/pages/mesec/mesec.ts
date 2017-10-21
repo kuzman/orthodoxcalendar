@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController, Platform, NavParams, ViewController, NavController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 import { CalendarProvider } from '../../providers/calendar/calendar';
 
@@ -105,13 +106,50 @@ export class ModalDayPage {
   year;
   month;
   day;
+  dayInWeek;
   mesec;
+  title_regular = '';
+  title_important = '';
+  dayDescription = '';
 
-  constructor(public platform: Platform, public params: NavParams, public viewCtrl: ViewController, private calendar: CalendarProvider,) {
+  constructor(public platform: Platform, public params: NavParams, public viewCtrl: ViewController, private calendar: CalendarProvider, private translate: TranslateService) {
     this.year = this.params.get('year');
     this.month = this.params.get('month');
     this.day = this.params.get('day');
+    this.dayInWeek = new Date(this.year, this.month, this.day).getDay();
     this.mesec = this.calendar.getMesecName((this.month));
+    this.calendar.loadMonth(this.month)
+    .then(data => {
+      this.loadDayData();
+    });
+  }
+
+  loadDayData() {
+    this.calendar.loadDay(this.day, this.month +1)
+    .then(dayData => {
+      this.days = dayData.holydays;
+      this.loadHeader(dayData);
+    });
+  }
+
+  loadHeader(dayData) {
+    this.title_important = '';
+    this.title_regular = '';
+    let th = this.translate.instant('th');
+    let dayOfWeek = this.calendar.getDayOfWeek(this.dayInWeek);
+    let dayInYear = dayData.id;
+    this.dayDescription = dayOfWeek + ', ' + dayInYear + th;
+    for(let i=0; i<dayData.holydays.length; i++) {
+      if (this.dayInWeek === 0) {
+        this.title_important += dayData.holydays[i].title + ';';
+      } else {
+        if(dayData.holydays[i].important) {
+          this.title_important += dayData.holydays[i].title + ';';
+        } else {
+          this.title_regular += dayData.holydays[i].title + ';';
+        }
+      }
+    }
   }
 
   dismiss() {
