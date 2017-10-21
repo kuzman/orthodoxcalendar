@@ -108,6 +108,7 @@ export class ModalDayPage {
   day;
   dayInWeek;
   mesec;
+  days=[]
   title_regular = '';
   title_important = '';
   dayDescription = '';
