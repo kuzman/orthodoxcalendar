@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ModalController, Platform, NavParams, ViewController, NavController } from 'ionic-angular';
 
 import { CalendarProvider } from '../../providers/calendar/calendar';
 
@@ -10,7 +10,10 @@ import { CalendarProvider } from '../../providers/calendar/calendar';
 export class MesecPage {
   mesec;
   movingDate = new Date();
+  year = this.movingDate.getFullYear();
   daysData = {
+    year: this.year,
+    month: this.movingDate.getMonth(),
     dayOfWeek: '',
     date_greg: 0,
     date_julian: 0,
@@ -20,14 +23,18 @@ export class MesecPage {
     }
   };
   tabData = [];
-  year = this.movingDate.getFullYear();
 
-  constructor(public navCtrl: NavController, private calendar: CalendarProvider) {
+  constructor(public navCtrl: NavController, private calendar: CalendarProvider, public modalCtrl: ModalController) {
   }
 
   ionViewWillEnter() {
     this.movingDate = new Date();
     this.loadGridData();
+  }
+
+  openModal(date) {
+    let modal = this.modalCtrl.create(ModalDayPage, date);
+    modal.present();
   }
 
   loadGridData() {
@@ -39,6 +46,8 @@ export class MesecPage {
       this.tabData = [];
       for(let i=0; i<data.days.length;i++) {
         this.daysData = {
+          year: this.year,
+          month: this.movingDate.getMonth(),
           dayOfWeek: '',
           date_greg: 0,
           date_julian: 0,
@@ -86,5 +95,26 @@ export class MesecPage {
     } else {
       this.nextMonth();
     }
+  }
+}
+
+@Component({
+  templateUrl: 'modal-day.html'
+})
+export class ModalDayPage {
+  year;
+  month;
+  day;
+  mesec;
+
+  constructor(public platform: Platform, public params: NavParams, public viewCtrl: ViewController, private calendar: CalendarProvider,) {
+    this.year = this.params.get('year');
+    this.month = this.params.get('month');
+    this.day = this.params.get('day');
+    this.mesec = this.calendar.getMesecName((this.month));
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

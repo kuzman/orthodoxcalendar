@@ -5,7 +5,7 @@ let praznici: PrazniciProvider = null;
 describe('PrazniciProvider', () => {
   beforeEach(() => {
     praznici = new PrazniciProvider();
-    spyOn(praznici['storage'], 'set').and.callThrough();
+    // spyOn(praznici['storage'], 'set').and.callThrough();
   });
 
   it('returns a date for Easter', () => {
@@ -22,6 +22,12 @@ describe('PrazniciProvider', () => {
     let easter = praznici.getVeligden(2017).valueOf();
     let forgiveness = praznici.getProchka(2017);
     expect(forgiveness.setDate(forgiveness.getDate() + 49).valueOf()).toEqual(easter);
+  });
+
+  it('expects that the Long Length to be 48 days before Easter', () => {
+    let easter = praznici.getVeligden(2017).valueOf();
+    let longLength = praznici.getVeligdenskiPosti(2017);
+    expect(longLength.setDate(longLength.getDate() + 48).valueOf()).toEqual(easter);
   });
   
 });

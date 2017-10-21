@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{day}} {{ mesec }} {{year}}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">{{'cancel' | translate}}</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <div class="sub-header-description" text-center>{{dayDescription}}</div>
+      <div class="sub-header-title" text-wrap><div class="title_important">{{title_important}}</div><div>{{title_regular}}</div></div>
+    </ion-card-header>
+    <ion-card-content (swipe)="swipeEvent($event)">
+      <div *ngFor="let day of days">
+        <h3 [ngClass]="day.important ? 'day-title-important' : 'day-title-regular'">{{day.title}}</h3>
+        <div class="day-description" text-justify>{{day.desc}}</div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

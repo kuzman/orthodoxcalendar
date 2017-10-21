@@ -32,7 +32,7 @@
         <div></div>
       </ion-col>
     </ion-row>
-    <ion-row *ngFor="let rowData of tabData; even as isEven" class="grid-row" [ngClass]="isEven?'grid-col-even':''">
+    <ion-row *ngFor="let rowData of tabData; even as isEven" class="grid-row" [ngClass]="isEven?'grid-col-even':''" (click)="openModal({year: rowData.year, month: rowData.month, day: rowData.date_greg})">
       <ion-col>
         <div>{{rowData.dayOfWeek}}</div>
       </ion-col>

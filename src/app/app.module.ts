@@ -5,7 +5,7 @@ import { HttpModule, Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { MesecPage } from '../pages/mesec/mesec';
+import { MesecPage, ModalDayPage } from '../pages/mesec/mesec';
 import { GodinaPage } from '../pages/godina/godina';
 import { HomePage } from '../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings';
@@ -30,7 +30,8 @@ export function createTranslateLoader(http: Http) {
     MesecPage,
     GodinaPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ModalDayPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +52,8 @@ export function createTranslateLoader(http: Http) {
     MesecPage,
     GodinaPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ModalDayPage
   ],
   providers: [
     StatusBar,
