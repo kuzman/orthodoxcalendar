@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 
 import { PrazniciProvider } from '../praznici/praznici';
 
+interface CalendarData {
+  days: any;
+}
 
 @Injectable()
 export class CalendarProvider {
+  
   path = 'assets/months_' + this.translate.currentLang + '/';
 
   public month: any;
@@ -14,7 +18,7 @@ export class CalendarProvider {
   year: Number;
   meseci = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dek'];
   denovi = ['ned', 'pon', 'vtor', 'sred', 'cet', 'pet', 'sab'];
-  constructor(private http: Http, private translate: TranslateService, private praznici: PrazniciProvider) {
+  constructor(private http: HttpClient, private translate: TranslateService, private praznici: PrazniciProvider) {
   }
 
   public setMonthCache(month) {
@@ -52,8 +56,8 @@ export class CalendarProvider {
       return Promise.resolve(this.month);
       } else {
         return new Promise(resolve => {
-          this.http.get(this.path + month + '.json')
-          .map(response => response.json()).subscribe(data => {
+          this.http.get<CalendarData>(this.path + month + '.json')
+          .subscribe(data => {
             if (!this.isLeapYear(this.year) && month==2) {
               data.days = data.days.slice(0, data.days.length - 1);
             } else {
