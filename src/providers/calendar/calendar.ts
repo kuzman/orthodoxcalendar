@@ -212,7 +212,7 @@ export class CalendarProvider {
           case 'velikiPetok':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
-                title: this.translate.instant('veliliPetok'),
+                title: this.translate.instant('velikiPetok'),
                 important: true,
                 desc: this.translate.instant('praznik_velikiPetok')
               });

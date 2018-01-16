@@ -202,7 +202,7 @@ export class PrazniciProvider {
    */
   public getZadushnicaZimska(year): Date {
     let veligden = this.getVeligden(year);
-    return new Date(year, veligden.getMonth(), veligden.getDate() - 59);
+    return new Date(year, veligden.getMonth(), veligden.getDate() - 57);
   }
 
   /**
