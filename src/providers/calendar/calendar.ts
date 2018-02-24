@@ -10,7 +10,7 @@ interface CalendarData {
 
 @Injectable()
 export class CalendarProvider {
-  
+
   path = 'assets/months_' + this.translate.currentLang + '/';
 
   public month: any;
@@ -144,11 +144,12 @@ export class CalendarProvider {
     let praznici = this.praznici.getYearMovingHolydays(this.year);
     let dateToCompare = new Date(Number(this.year), Number(this.month.month) - 1, Number(day.day)).setHours(0, 0, 0, 0);
     for (let key in praznici) {
-      if (praznici.hasOwnProperty(key)) {
+      if (praznici.hasOwnProperty(key) && !day.holydays.find(holyday => holyday.key === key)) {
         switch(key) {
           case 'zadushnica_zimska':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('zadushnica_zimska'),
                 important: true,
                 desc: ""
@@ -158,6 +159,7 @@ export class CalendarProvider {
           case 'prochka':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('prochka'),
                 important: true,
                 desc: this.translate.instant('praznik_prochka')
@@ -167,6 +169,7 @@ export class CalendarProvider {
           case 'veligdenski_posti':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('veligdenski_posti'),
                 important: true,
                 desc: ""
@@ -176,6 +179,7 @@ export class CalendarProvider {
           case 'todorovaSabota':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('todorovaSabota'),
                 important: true,
                 desc: this.translate.instant('praznik_todorovaSabota')
@@ -185,6 +189,7 @@ export class CalendarProvider {
           case 'lazarovaSabota':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('lazarovaSabota'),
                 important: true,
                 desc: this.translate.instant('praznik_lazarovaSabota')
@@ -194,6 +199,7 @@ export class CalendarProvider {
           case 'cvetnici':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('cvetnici'),
                 important: true,
                 desc: this.translate.instant('praznik_cvetnici')
@@ -203,6 +209,7 @@ export class CalendarProvider {
           case 'velikiChetvrtok':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('velikiChetvrtok'),
                 important: true,
                 desc: this.translate.instant('praznik_velikiChetvrtok')
@@ -212,6 +219,7 @@ export class CalendarProvider {
           case 'velikiPetok':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('velikiPetok'),
                 important: true,
                 desc: this.translate.instant('praznik_velikiPetok')
@@ -221,6 +229,7 @@ export class CalendarProvider {
           case 'velikaSabota':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('velikaSabota'),
                 important: true,
                 desc: this.translate.instant('praznik_velikaSabota')
@@ -230,6 +239,7 @@ export class CalendarProvider {
           case 'veligden':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('veligden'),
                 important: true,
                 desc: this.translate.instant('praznik_veligden')
@@ -239,6 +249,7 @@ export class CalendarProvider {
           case 'veligden_2':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('veligden_2'),
                 important: true,
                 desc: ""
@@ -248,6 +259,7 @@ export class CalendarProvider {
           case 'veligden_3':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('veligden_3'),
                 important: true,
                 desc: ""
@@ -257,6 +269,7 @@ export class CalendarProvider {
           case 'istochenPetok':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('istochenPetok'),
                 important: true,
                 desc: this.translate.instant('praznik_istochenPetok')
@@ -266,6 +279,7 @@ export class CalendarProvider {
           case 'spasovden':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('spasovden'),
                 important: true,
                 desc: this.translate.instant('praznik_spasovden')
@@ -275,6 +289,7 @@ export class CalendarProvider {
           case 'duovden':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('duovden'),
                 important: true,
                 desc: this.translate.instant('praznik_duovden')
@@ -284,6 +299,7 @@ export class CalendarProvider {
           case 'duovden2':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('duovden2'),
                 important: true,
                 desc: ""
@@ -293,6 +309,7 @@ export class CalendarProvider {
           case 'duovden3':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('duovden3'),
                 important: true,
                 desc: ""
@@ -302,6 +319,7 @@ export class CalendarProvider {
           case 'petroviPosti':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('petroviPosti'),
                 important: true,
                 desc: ""
@@ -311,6 +329,7 @@ export class CalendarProvider {
           case 'zadushnica_noemvri':
             if(dateToCompare.valueOf() === praznici[key].valueOf()){
               day.holydays.push({
+                key: key,
                 title: this.translate.instant('zadushnica_noemvri'),
                 important: true,
                 desc: ""
